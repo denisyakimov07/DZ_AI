@@ -167,6 +167,7 @@ def add_row():
     st.session_state["rows"].append(str(element_id))
     print(rows_collection)
 
+
 def remove_row(row_id):
     st.session_state["rows"].remove(str(row_id))
 
