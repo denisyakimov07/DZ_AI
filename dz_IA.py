@@ -173,13 +173,17 @@ def remove_row(row_id):
 
 def generate_row(row_id):
     row_container = st.empty()
-    row_columns = row_container.columns(5)
-    class_name = row_columns[0].text_input("Class Name", key=f"txt_{row_id}")
-    chans = row_columns[1].number_input("Chans", step=1, key=f"nbr_{row_id}")
+    row_columns = row_container.columns([5,2,2,2,2,1])
+    class_name = row_columns[0].text_input("Class Name", key=f"class_name_{row_id}")
+    chans = row_columns[1].number_input("Chans", step=1, key=f"chans_{row_id}", value=1, )
+    QuantityMin = row_columns[2].number_input("QuantityMin", step=1, key=f"QuantityMin_{row_id}", value=0)
+    QuantityMax = row_columns[3].number_input("QuantityMax", step=1, key=f"QuantityMax_{row_id}", value=0)
+    HealthMin = row_columns[4].number_input("HealthMin", step=0.1, key=f"HealthMin_{row_id}", value=0)
+    HealthyMax = row_columns[5].number_input("HealthMax", step=0.1, key=f"HealthMax_{row_id}", value=0)
+    row_columns[6].button(f"🗑️", key=f"del_{row_id}", on_click=remove_row, args=[row_id])
 
-    row_columns[4].button(f"🗑️", key=f"del_{row_id}", on_click=remove_row, args=[row_id])
-
-    return {"class_name": class_name, "chans": chans}
+    return {"class_name": class_name, "chans": chans, "QuantityMin": QuantityMin, "QuantityMax":QuantityMax,
+            "HealthMin":HealthMin, "HealthyMax": HealthyMax}
 
 
 st.title("Item Inventory")
